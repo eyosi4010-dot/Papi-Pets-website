@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Papi Pets | Premium Pet Food & Accessories</title>
+    <!-- Tailwind CSS for modern layout structure -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Playfair Display for elegant headlines, Inter for smooth legibility -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- FontAwesome for modern crisp icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Three.js for immersive 3D interactive showcase -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            cream: '#FAF6F0',
+                            beige: '#F3EBE1',
+                            terracotta: '#C87A53',
+                            darkTerracotta: '#A95C38',
+                            sage: '#708264',
+                            espresso: '#2C1B11',
+                            charcoal: '#1A110B',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #FAF6F0;
+            color: #2C1B11;
+            scroll-behavior: smooth;
+        }
+        /* Custom scrollbar matching premium espresso theme */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FAF6F0;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #C87A53;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #2C1B11;
+        }
+        /* Elegant smooth hover shadows for 3D card layout */
+        .premium-card {
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .premium-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(44, 27, 17, 0.12);
+        }
+    </style>
+</head>
+<body class="font-sans antialiased overflow-x-hidden">
+
+    <!-- Announcement Bar -->
+    <div class="bg-brand-espresso text-brand-cream text-xs py-2 px-4 text-center font-medium tracking-wider">
+        <i class="fa-solid fa-truck-fast mr-2 text-brand-terracotta"></i> FREE SHIPPING ON ORDERS OVER 1,500 ETB IN ADDIS ABABA!
+    </div>
+
+    <!-- Simplified Navigation Bar (Only Contact remains, logo movement is disabled) -->
+    <nav class="sticky top-0 z-40 bg-brand-cream/90 backdrop-blur-md border-b border-brand-beige/50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Brand Identity -->
+                <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 rounded-full bg-brand-terracotta flex items-center justify-center text-brand-cream shadow-md overflow-hidden">
+                        <!-- Removed 'float-slow' class to avoid any movement of the logo -->
+                        <img src="https://cdn4.telesco.pe/file/rh_dJaCX_4YngLW9Q5oRI0ozrmOwvNAaV4k125aDruS1tTIYJP21mXcRd8LUhKZEmmGzxptplzyWJLCoRKVKM25XARpuSai5C5ciwBUw6o8wTDWxfyfekU6gN55Ob8VirCergPhhUv-lxOowiveNXPkN50XrxGr0KFE6lZMA_yITmsZLaSW3sipKVQ8iwjgsezcL1CRiz1Du--ZwzlqyZJI86TI4vvZ-VtlZthZafjoErHShvuzcCNphwLfcO1IOCNULs1iAgOYT25OY_k9u2vl7FMafmCbUPMAEX-ZZt8en0zEX7rCregY0fDi8GZs0gxocbsj0u8Gvthn_DzLw0A.jpg" alt="Papi Pets Logo" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/100x100/C87A53/FAF6F0?text=Papi'">
+                    </div>
+                    <div>
+                        <span class="font-serif text-2xl font-bold tracking-tight text-brand-espresso block leading-none">Papi Pets</span>
+                        <span class="text-[10px] tracking-widest text-brand-terracotta font-semibold uppercase">Food & Accessories</span>
+                    </div>
+                </div>
+
+                <!-- Interactive UI Elements & Contact Link -->
+                <div class="flex items-center space-x-6">
+                    <a href="tel:0911676172" class="hidden sm:inline-flex items-center gap-1 font-sans text-sm font-semibold text-brand-espresso hover:text-brand-terracotta transition-all">
+                        <i class="fa-solid fa-phone text-brand-terracotta"></i> 0911676172
+                    </a>
+                    
+                    <a href="https://t.me/papipet1" target="_blank" class="font-serif text-sm font-semibold text-brand-espresso hover:text-brand-terracotta border-b-2 border-brand-terracotta/0 hover:border-brand-terracotta pb-1 transition-all">
+                        <i class="fa-regular fa-comments mr-1"></i> Contact Us
+                    </a>
+                    
+                    <button onclick="toggleCart()" class="relative text-brand-espresso hover:text-brand-terracotta transition-colors p-2" aria-label="Shopping Cart">
+                        <i class="fa-solid fa-bag-shopping text-lg"></i>
+                        <span id="cartCount" class="absolute -top-1 -right-1 bg-brand-terracotta text-brand-cream text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center">0</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Side Cart Drawer (Slide Out) -->
+    <div id="cartDrawer" class="fixed inset-y-0 right-0 z-50 w-full sm:w-96 bg-brand-cream shadow-2xl transform translate-x-full transition-transform duration-500 ease-in-out border-l border-brand-beige">
+        <div class="p-6 h-full flex flex-col justify-between">
+            <div>
+                <div class="flex items-center justify-between border-b border-brand-beige pb-4">
+                    <h3 class="font-serif text-xl font-bold text-brand-espresso flex items-center gap-2">
+                        <i class="fa-solid fa-basket-shopping text-brand-terracotta"></i> Your Pet Bag
+                    </h3>
+                    <button onclick="toggleCart()" class="text-brand-espresso hover:text-brand-terracotta text-xl">&times;</button>
+                </div>
+                <div id="cartItemsContainer" class="mt-6 space-y-4 overflow-y-auto max-h-[55vh] pr-2">
+                    <!-- Dynamic cart items will populate here -->
+                    <p class="text-center text-brand-espresso/60 py-10">Your bag is currently empty. Give your pup some love!</p>
+                </div>
+            </div>
+            <div class="border-t border-brand-beige pt-4">
+                <div class="flex items-center justify-between text-brand-espresso font-semibold mb-4">
+                    <span>Total Subtotal:</span>
+                    <span id="cartSubtotal">0.00 ETB</span>
+                </div>
+                <button onclick="checkoutMessage()" class="w-full bg-brand-espresso hover:bg-brand-terracotta text-brand-cream font-semibold py-3 px-6 rounded-full transition-colors flex items-center justify-center gap-2 shadow-lg">
+                    <span>Proceed to Telegram Checkout</span> <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 bg-brand-espresso text-brand-cream px-6 py-4 rounded-xl shadow-2xl flex items-center gap-3 transform translate-y-20 opacity-0 transition-all duration-300 border border-brand-terracotta/20">
+        <i class="fa-solid fa-circle-check text-brand-terracotta text-xl"></i>
+        <span id="toastMsg" class="font-medium text-sm">Product added to your cart!</span>
+    </div>
+
+    <!-- Hero / Immersive 3D Space -->
+    <section id="hero" class="relative bg-gradient-to-b from-brand-beige via-brand-cream to-brand-cream py-12 md:py-20 lg:py-24 overflow-hidden">
+        <!-- Floating decorative organic background elements -->
+        <div class="absolute top-10 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-brand-terracotta/5 rounded-full blur-3xl pointer-events-none"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Left Hand Text & Intro -->
+                <div class="lg:col-span-6 space-y-6 text-center lg:text-left">
+                    <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-terracotta/10 text-brand-darkTerracotta text-xs font-bold uppercase tracking-wider">
+                        <i class="fa-solid fa-sparkles"></i> Elegance Meets Companion Care
+                    </span>
+                    <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-brand-espresso leading-tight">
+                        Premium Nutrition <br class="hidden sm:inline" /> 
+                        <span class="text-brand-terracotta italic">& Care</span> for Your Best Friend.
+                    </h1>
+                    <p class="text-base sm:text-lg text-brand-espresso/80 max-w-xl mx-auto lg:mx-0">
+                        At Papi Pets, we believe premium quality accessories & rich organic foods guarantee a lifetime of happiness. Hand-selected, dog-safe elements built for modern pet parents.
+                    </p>
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
+                        <a href="https://t.me/papipet1" target="_blank" class="w-full sm:w-auto bg-brand-espresso hover:bg-brand-terracotta text-brand-cream font-semibold py-4 px-8 rounded-full transition-all duration-300 shadow-xl hover:shadow-brand-terracotta/20 flex items-center justify-center gap-2">
+                            <span>Shop Best Sellers</span> <i class="fa-solid fa-chevron-right text-xs"></i>
+                        </a>
+                        <button onclick="document.getElementById('threeCanvas').scrollIntoView({behavior: 'smooth'})" class="w-full sm:w-auto border-2 border-brand-espresso/20 hover:border-brand-espresso text-brand-espresso font-semibold py-4 px-8 rounded-full transition-all duration-300 flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-cube text-brand-terracotta"></i> <span>Interact in 3D</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Right Hand 3D Canvas / Styled Product Visual Stack -->
+                <div class="lg:col-span-6 relative flex flex-col justify-center">
+                    <!-- Overlapping Designer Home Page Image Card (Premium Nutrition & Care Image) -->
+                    <div class="absolute -top-10 -left-6 w-36 h-36 sm:w-44 sm:h-44 rounded-3xl overflow-hidden shadow-2xl border-4 border-brand-beige z-20 transform -rotate-12 transition-all hover:rotate-0 hover:scale-110 duration-300">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWSUUCY6nLknbC412-HiUeJ_KvDIkq9l2GY6HwDG72CA&s" alt="Premium Nutrition & Care for Your Best Friend Image" class="w-full h-full object-cover">
+                        <div class="absolute bottom-2 left-2 bg-brand-terracotta/90 text-brand-cream text-[10px] font-bold px-2 py-0.5 rounded-full">
+                            Papi Live
+                        </div>
+                    </div>
+                    
+                    <!-- Floating Canvas Card -->
+                    <div class="relative w-full h-[360px] sm:h-[450px] bg-brand-espresso rounded-3xl overflow-hidden shadow-2xl border-4 border-brand-beige z-10">
+                        <!-- Canvas overlay UI guides -->
+                        <div class="absolute top-4 right-4 z-10 bg-brand-cream/10 backdrop-blur-md px-3 py-1.5 rounded-full text-xs text-brand-cream flex items-center gap-2">
+                            <span class="w-2.5 h-2.5 bg-green-500 rounded-full animate-ping"></span>
+                            <span>Interactive 3D Preview Lounge</span>
+                        </div>
+                        <div class="absolute bottom-4 right-4 z-10 text-[10px] text-brand-cream/50 pointer-events-none">
+                            Drag to rotate item • Scroll to zoom
+                        </div>
+                        <!-- Canvas Element -->
+                        <canvas id="threeCanvas" class="w-full h-full block bg-gradient-to-b from-[#1c110a] to-[#2C1B11]"></canvas>
+                    </div>
+                    
+                    <!-- Quick 3D Material Switchers -->
+                    <div class="flex justify-center gap-2 mt-4 z-10">
+                        <button onclick="change3dProduct('bowl')" class="bg-brand-beige hover:bg-brand-terracotta hover:text-brand-cream text-brand-espresso px-4 py-2 rounded-xl text-xs font-semibold transition-all shadow flex items-center gap-2">
+                            <i class="fa-solid fa-bowl-food"></i> 3D Papi's Premium Bowl
+                        </button>
+                        <button onclick="change3dProduct('treat')" class="bg-brand-beige hover:bg-brand-terracotta hover:text-brand-cream text-brand-espresso px-4 py-2 rounded-xl text-xs font-semibold transition-all shadow flex items-center gap-2">
+                            <i class="fa-solid fa-bone"></i> 3D Papi Organic Bone
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Shop By Category Grid with Custom Images -->
+    <section id="categories" class="py-16 md:py-24 bg-brand-cream">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-brand-terracotta text-sm font-bold uppercase tracking-widest block mb-2">Pillars of Care</span>
+                <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-brand-espresso">Shop by Category</h2>
+                <div class="w-20 h-1 bg-brand-terracotta mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+                <!-- Pillar 1: Premium Food & Treats with Nutrition Image -->
+                <div class="premium-card relative group rounded-3xl overflow-hidden shadow-xl bg-brand-espresso text-brand-cream aspect-[4/3] flex flex-col justify-end p-8 sm:p-12 border-4 border-brand-beige">
+                    <div class="absolute inset-0 bg-gradient-to-t from-brand-espresso via-brand-espresso/70 to-transparent z-10"></div>
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqXgvBbu5WW3IyKjvNrt-7FWQclpQpLwAY8VaIFJo0Pg&s=10" alt="Nutrition" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 pointer-events-none" onerror="this.src='https://placehold.co/800x600/C87A53/FAF6F0?text=Premium+Nutrition'">
+                    
+                    <div class="relative z-20 space-y-3">
+                        <span class="bg-brand-terracotta/90 text-brand-cream text-xs font-bold uppercase px-3 py-1 rounded-full inline-block">Pillar One</span>
+                        <h3 class="font-serif text-2xl sm:text-4xl font-bold leading-tight">Premium Treats &amp; Organic Food</h3>
+                        <p class="text-sm text-brand-cream/80 max-w-md">Dehydrated chicken breasts, premium chicken nails, nutritious slow-baked kibble &amp; meal toppers.</p>
+                        <div class="pt-4">
+                            <a href="https://t.me/papipet1" target="_blank" class="inline-flex items-center gap-2 bg-brand-cream text-brand-espresso font-semibold py-3 px-6 rounded-full group-hover:bg-brand-terracotta group-hover:text-brand-cream transition-colors">
+                                <span>Browse Nutrition</span> <i class="fa-solid fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pillar 2: Essential Grooming Tools with Accessory Grooming Image -->
+                <div class="premium-card relative group rounded-3xl overflow-hidden shadow-xl bg-brand-espresso text-brand-cream aspect-[4/3] flex flex-col justify-end p-8 sm:p-12 border-4 border-brand-beige">
+                    <div class="absolute inset-0 bg-gradient-to-t from-brand-espresso via-brand-espresso/70 to-transparent z-10"></div>
+                    <img src="https://www.comfortstyle.co.uk/cdn/shop/files/81W9zIqpPFL._AC_SL1500.jpg?v=1755879183" alt="Accessory grooming" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 pointer-events-none" onerror="this.src='https://placehold.co/800x600/708264/FAF6F0?text=Premium+Grooming'">
+                    
+                    <div class="relative z-20 space-y-3">
+                        <span class="bg-brand-sage text-brand-cream text-xs font-bold uppercase px-3 py-1 rounded-full inline-block">Pillar Two</span>
+                        <h3 class="font-serif text-2xl sm:text-4xl font-bold leading-tight">Must-Have Pet Accessories</h3>
+                        <p class="text-sm text-brand-cream/80 max-w-md">Organic shampoos, ultra-soft detangling hair brushes, and professional nail clippers with protective guards.</p>
+                        <div class="pt-4">
+                            <a href="https://t.me/papipet1" target="_blank" class="inline-flex items-center gap-2 bg-brand-cream text-brand-espresso font-semibold py-3 px-6 rounded-full group-hover:bg-brand-sage group-hover:text-brand-cream transition-colors">
+                                <span>Explore Accessories</span> <i class="fa-solid fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products Showcase (Interactive) -->
+    <section id="featured" class="py-16 md:py-24 bg-brand-beige/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+                <div>
+                    <span class="text-brand-terracotta text-sm font-bold uppercase tracking-widest block mb-2">Best Sellers</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl font-bold text-brand-espresso">Featured Essentials</h2>
+                    <p class="text-brand-espresso/70 mt-2 max-w-lg">Hand-picked by veterinarians, approved by picky pups. Try our premium chicken delicacies and accessory favorites.</p>
+                </div>
+                <!-- Category Selectable Tabs -->
+                <div class="flex flex-wrap gap-2 mt-6 md:mt-0">
+                    <button onclick="filterProducts('all')" id="filter-all" class="filter-btn active bg-brand-espresso text-brand-cream px-5 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider transition-all">All Products</button>
+                    <button onclick="filterProducts('food')" id="filter-food" class="filter-btn bg-brand-cream hover:bg-brand-espresso/10 text-brand-espresso px-5 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider transition-all">Gourmet Food</button>
+                    <button onclick="filterProducts('accessories')" id="filter-accessories" class="filter-btn bg-brand-cream hover:bg-brand-espresso/10 text-brand-espresso px-5 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider transition-all">Care &amp; Tools</button>
+                </div>
+            </div>
+
+            <!-- Dynamic Product Grid -->
+            <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                
+                <!-- Product Card 1 with Protein Kibble Image -->
+                <div class="product-item premium-card bg-brand-cream rounded-3xl overflow-hidden shadow-md flex flex-col justify-between border border-brand-beige" data-category="food">
+                    <div class="relative overflow-hidden aspect-square bg-brand-beige group">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoXeJeep_bJGs3vykCeYI_E6u3fPvgEynzQjWr0M_Uyw&s=10" alt="Protein Kibble" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 pointer-events-none" onerror="this.src='https://placehold.co/400x400/C87A53/FAF6F0?text=Premium+Kibble'">
+                        <span class="absolute top-4 left-4 bg-brand-terracotta text-brand-cream text-[10px] font-bold uppercase px-2.5 py-1 rounded-full">New Recipe</span>
+                    </div>
+                    <div class="p-6 flex-grow flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-serif text-lg font-bold text-brand-espresso line-clamp-1">Papi Premium High-Protein Kibble</h3>
+                            <p class="text-xs text-brand-espresso/50 mt-1 uppercase font-semibold tracking-wider">Premium Gourmet Food</p>
+                            <div class="flex items-center text-amber-500 gap-1 mt-2 text-xs">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                                <span class="text-brand-espresso/60 text-[10px] ml-1">(48)</span>
+                            </div>
+                            <p class="text-xs text-brand-espresso/70 mt-3 line-clamp-2">Rich in wholesome grains, protein and pure ancestral energy formulas.</p>
+                        </div>
+                        <div class="flex items-center justify-between mt-6 pt-4 border-t border-brand-beige/50">
+                            <div>
+                                <span class="text-brand-espresso font-bold text-lg">950 ETB</span>
+                            </div>
+                            <button onclick="addToCart('Papi Premium High-Protein Kibble', 950, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoXeJeep_bJGs3vykCeYI_E6u3fPvgEynzQjWr0M_Uyw&s=10')" class="bg-brand-espresso hover:bg-brand-terracotta text-brand-cream text-xs font-semibold py-2.5 px-4 rounded-full transition-colors flex items-center gap-2">
+                                <i class="fa-solid fa-plus"></i> Add
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 2 with Dehydrated Chicken Image -->
+                <div class="product-item premium-card bg-brand-cream rounded-3xl overflow-hidden shadow-md flex flex-col justify-between border border-brand-beige" data-category="food">
+                    <div class="relative overflow-hidden aspect-square bg-brand-beige group">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSu2KTz9W_Sbr009X3_AcDnKBen9-zx5qhF1RuqEBmnyA&s=10" alt="Dehydrated Chicken" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 pointer-events-none" onerror="this.src='https://placehold.co/400x400/A95C38/FAF6F0?text=Dehydrated+Chicken'">
+                        <span class="absolute top-4 left-4 bg-brand-terracotta text-brand-cream text-[10px] font-bold uppercase px-2.5 py-1 rounded-full">Organic</span>
+                    </div>
+                    <div class="p-6 flex-grow flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-serif text-lg font-bold text-brand-espresso line-clamp-1">Natural Dehydrated Chicken Nails &amp; Feet</h3>
+                            <p class="text-xs text-brand-espresso/50 mt-1 uppercase font-semibold tracking-wider">Dehydrated Chew Treats</p>
+                            <div class="flex items-center text-amber-500 gap-1 mt-2 text-xs">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                                <span class="text-brand-espresso/60 text-[10px] ml-1">(120)</span>
+                            </div>
+                            <p class="text-xs text-brand-espresso/70 mt-3 line-clamp-2">High calcium crunch. Outstanding dental plaque and tartar reducer.</p>
+                        </div>
+                        <div class="flex items-center justify-between mt-6 pt-4 border-t border-brand-beige/50">
+                            <div>
+                                <span class="text-brand-espresso font-bold text-lg">450 ETB</span>
+                            </div>
+                            <button onclick="addToCart('Natural Dehydrated Chicken Nails & Feet', 450, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSu2KTz9W_Sbr009X3_AcDnKBen9-zx5qhF1RuqEBmnyA&s=10')" class="bg-brand-espresso hover:bg-brand-terracotta text-brand-cream text-xs font-semibold py-2.5 px-4 rounded-full transition-colors flex items-center gap-2">
+                                <i class="fa-solid fa-plus"></i> Add
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 3 with Nail Clipper Image -->
+                <div class="product-item premium-card bg-brand-cream rounded-3xl overflow-hidden shadow-md flex flex-col justify-between border border-brand-beige" data-category="accessories">
+                    <div class="relative overflow-hidden aspect-square bg-brand-beige group">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8FM9bjiqGIhRheL2SD2jV7WFmY1oPXNFXxZP4R9T7Wg&s=10" alt="Heavy-Duty Nail Cutter" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 pointer-events-none" onerror="this.src='https://placehold.co/400x400/708264/FAF6F0?text=Grooming+Set'">
+                        <span class="absolute top-4 left-4 bg-brand-sage text-brand-cream text-[10px] font-bold uppercase px-2.5 py-1 rounded-full">Top Seller</span>
+                    </div>
+                    <div class="p-6 flex-grow flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-serif text-lg font-bold text-brand-espresso line-clamp-1">Heavy-Duty Nail Cutter &amp; Clipper</h3>
+                            <p class="text-xs text-brand-espresso/50 mt-1 uppercase font-semibold tracking-wider">Premium Accessories</p>
+                            <div class="flex items-center text-amber-500 gap-1 mt-2 text-xs">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
+                                <span class="text-brand-espresso/60 text-[10px] ml-1">(94)</span>
+                            </div>
+                            <p class="text-xs text-brand-espresso/70 mt-3 line-clamp-2">Surgical-grade stainless steel blades equipped with a protective quick guard.</p>
+                        </div>
+                        <div class="flex items-center justify-between mt-6 pt-4 border-t border-brand-beige/50">
+                            <div>
+                                <span class="text-brand-espresso font-bold text-lg">680 ETB</span>
+                            </div>
+                            <button onclick="addToCart('Heavy-Duty Nail Cutter & Clipper', 680, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8FM9bjiqGIhRheL2SD2jV7WFmY1oPXNFXxZP4R9T7Wg&s=10')" class="bg-brand-espresso hover:bg-brand-terracotta text-brand-cream text-xs font-semibold py-2.5 px-4 rounded-full transition-colors flex items-center gap-2">
+                                <i class="fa-solid fa-plus"></i> Add
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 4 with Collar Image -->
+                <div class="product-item premium-card bg-brand-cream rounded-3xl overflow-hidden shadow-md flex flex-col justify-between border border-brand-beige" data-category="accessories">
+                    <div class="relative overflow-hidden aspect-square bg-brand-beige group">
+                        <img src="https://www.pintu-design.com/cdn/shop/files/MONTE_COLLAR_-_GREY_-_LIFESTYLE_2.jpg?v=1753160492&width=1500" alt="Premium Leather Collar" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 pointer-events-none" onerror="this.src='https://placehold.co/400x400/1A110B/FAF6F0?text=Leather+Collar'">
+                        <span class="absolute top-4 left-4 bg-brand-sage text-brand-cream text-[10px] font-bold uppercase px-2.5 py-1 rounded-full">Premium</span>
+                    </div>
+                    <div class="p-6 flex-grow flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-serif text-lg font-bold text-brand-espresso line-clamp-1">Signature Sage Leather Collar</h3>
+                            <p class="text-xs text-brand-espresso/50 mt-1 uppercase font-semibold tracking-wider">Premium Accessories</p>
+                            <div class="flex items-center text-amber-500 gap-1 mt-2 text-xs">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                                <span class="text-brand-espresso/60 text-[10px] ml-1">(52)</span>
+                            </div>
+                            <p class="text-xs text-brand-espresso/70 mt-3 line-clamp-2">Hand-crafted genuine leather collar built for utmost comfortable luxury style.</p>
+                        </div>
+                        <div class="flex items-center justify-between mt-6 pt-4 border-t border-brand-beige/50">
+                            <div>
+                                <span class="text-brand-espresso font-bold text-lg">1,200 ETB</span>
+                            </div>
+                            <button onclick="addToCart('Signature Sage Leather Collar', 1200, 'https://www.pintu-design.com/cdn/shop/files/MONTE_COLLAR_-_GREY_-_LIFESTYLE_2.jpg?v=1753160492&width=1500')" class="bg-brand-espresso hover:bg-brand-terracotta text-brand-cream text-xs font-semibold py-2.5 px-4 rounded-full transition-colors flex items-center gap-2">
+                                <i class="fa-solid fa-plus"></i> Add
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Simplified Papi Promise Section (Shorter text layout with Promise Image) -->
+    <section id="promise" class="py-16 md:py-20 bg-brand-cream relative overflow-hidden">
+        <div class="absolute right-0 bottom-0 w-96 h-96 bg-brand-sage/5 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Sourced Promise Graphic -->
+                <div class="lg:col-span-5 relative">
+                    <div class="relative z-10 rounded-3xl overflow-hidden shadow-2xl border-4 border-brand-beige">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQclicUq-yrM5xqTBBULRWMMskL-oR_55rGQGnrD2n6dA&s" alt="Our Promise Image" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x600/C87A53/FAF6F0?text=Our+Promise'">
+                    </div>
+                </div>
+
+                <!-- Concise Text Explanation -->
+                <div class="lg:col-span-7 space-y-4">
+                    <span class="text-brand-terracotta text-xs font-bold uppercase tracking-widest block">The Papi Promise</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl font-bold text-brand-espresso leading-tight">We Never Compromise on Pet Well-Being</h2>
+                    <p class="text-brand-espresso/80 leading-relaxed text-sm sm:text-base">
+                        Papi Pets began with a simple mission: sourcing clean, chemical-free dehydrated treats and durable, safe grooming clippers. We safeguard your pet's health by ensuring all nutritional products remain entirely natural and tools are engineered with protective safety stops.
+                    </p>
+                    
+                    <div class="flex items-center gap-3 pt-2 text-brand-espresso">
+                        <i class="fa-solid fa-shield-heart text-brand-terracotta text-xl"></i>
+                        <span class="font-semibold text-sm">100% Sourced Honestly &amp; Vet-Approved</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Streamlined Connect Only Footer (With phone line preserved and static logo) -->
+    <footer id="connect" class="bg-brand-charcoal text-brand-cream pt-16 pb-8 relative overflow-hidden">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            
+            <div class="space-y-6">
+                <!-- Brand Identity (No floating movement) -->
+                <div class="flex items-center justify-center gap-3">
+                    <div class="w-12 h-12 rounded-full bg-brand-terracotta flex items-center justify-center text-brand-cream shadow-md overflow-hidden">
+                        <img src="https://cdn4.telesco.pe/file/rh_dJaCX_4YngLW9Q5oRI0ozrmOwvNAaV4k125aDruS1tTIYJP21mXcRd8LUhKZEmmGzxptplzyWJLCoRKVKM25XARpuSai5C5ciwBUw6o8wTDWxfyfekU6gN55Ob8VirCergPhhUv-lxOowiveNXPkN50XrxGr0KFE6lZMA_yITmsZLaSW3sipKVQ8iwjgsezcL1CRiz1Du--ZwzlqyZJI86TI4vvZ-VtlZthZafjoErHShvuzcCNphwLfcO1IOCNULs1iAgOYT25OY_k9u2vl7FMafmCbUPMAEX-ZZt8en0zEX7rCregY0fDi8GZs0gxocbsj0u8Gvthn_DzLw0A.jpg" alt="Papi Pets Logo" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/100x100/C87A53/FAF6F0?text=Papi'">
+                    </div>
+                    <div class="text-left">
+                        <span class="font-serif text-2xl font-bold tracking-tight text-brand-cream block leading-none">Papi Pets</span>
+                        <span class="text-[10px] tracking-widest text-brand-terracotta font-semibold uppercase">Premium Sourced</span>
+                    </div>
+                </div>
+
+                <p class="text-base text-brand-cream/80 max-w-lg mx-auto">
+                    Elevating pet nutrition and care in Addis Ababa. Have questions or want to request custom treats? Connect with our team directly.
+                </p>
+
+                <!-- Core Physical & Direct Contact Box -->
+                <div class="bg-brand-cream/5 p-6 rounded-2xl border border-brand-cream/10 max-w-md mx-auto space-y-4 text-sm text-left">
+                    <div class="flex items-start gap-3">
+                        <i class="fa-solid fa-location-dot text-brand-terracotta text-lg mt-0.5"></i>
+                        <div>
+                            <p class="font-bold text-brand-cream text-base">Store Headquarters</p>
+                            <p class="text-brand-cream/80 mt-1">Near to Atlas Hotel (Side by Yilma Siga Bet)</p>
+                            <p class="text-brand-cream/75">B1_03_510st, Addis Ababa, Ethiopia</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center gap-3 pt-3 border-t border-brand-cream/10">
+                        <i class="fa-solid fa-phone text-brand-terracotta"></i>
+                        <a href="tel:0911676172" class="font-bold text-lg hover:text-brand-terracotta text-brand-cream transition-colors">0911676172</a>
+                    </div>
+                </div>
+
+                <!-- Connect Channels -->
+                <div class="flex justify-center space-x-4 pt-4">
+                    <a href="tel:0911676172" class="w-10 h-10 rounded-full bg-brand-cream/10 hover:bg-brand-terracotta text-brand-cream flex items-center justify-center transition-colors" title="Call Us"><i class="fa-solid fa-phone"></i></a>
+                    <a href="https://t.me/papipet1" target="_blank" class="w-10 h-10 rounded-full bg-brand-cream/10 hover:bg-brand-terracotta text-brand-cream flex items-center justify-center transition-colors" title="Telegram"><i class="fa-brands fa-telegram"></i></a>
+                    <a href="https://t.me/papipet1" target="_blank" class="w-10 h-10 rounded-full bg-brand-cream/10 hover:bg-brand-terracotta text-brand-cream flex items-center justify-center transition-colors" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                </div>
+            </div>
+
+            <!-- Bottom Copyright bar -->
+            <div class="pt-12 mt-12 border-t border-brand-cream/10 text-[11px] text-brand-cream/40 flex flex-col sm:flex-row items-center justify-between">
+                <p>&copy; 2026 Papi Pets Food and Accessories. All Rights Reserved.</p>
+                <div class="flex space-x-4 mt-2 sm:mt-0">
+                    <a href="https://t.me/papipet1" target="_blank" class="hover:text-brand-terracotta transition-colors">Privacy Policy</a>
+                    <a href="https://t.me/papipet1" target="_blank" class="hover:text-brand-terracotta transition-colors">Terms of Service</a>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+    <script>
+        // Responsive State Variables
+        let cart = [];
+
+        // Cart Drawer Operations
+        function toggleCart() {
+            const drawer = document.getElementById('cartDrawer');
+            if (drawer.classList.contains('translate-x-full')) {
+                drawer.classList.remove('translate-x-full');
+            } else {
+                drawer.classList.add('translate-x-full');
+            }
+        }
+
+        // Add to Cart Logic
+        function addToCart(title, price, imageSrc) {
+            const existingItem = cart.find(item => item.title === title);
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({ title, price, imageSrc, quantity: 1 });
+            }
+            updateCartUI();
+            showToast(`"${title}" added to pet bag!`);
+        }
+
+        // Remove / Decrement Item
+        function decrementCartItem(title) {
+            const existingItem = cart.find(item => item.title === title);
+            if (existingItem) {
+                if (existingItem.quantity > 1) {
+                    existingItem.quantity -= 1;
+                } else {
+                    cart = cart.filter(item => item.title !== title);
+                }
+            }
+            updateCartUI();
+        }
+
+        // Increment Item
+        function incrementCartItem(title) {
+            const existingItem = cart.find(item => item.title === title);
+            if (existingItem) {
+                existingItem.quantity += 1;
+            }
+            updateCartUI();
+        }
+
+        // Synchronize and update cart interface elements
+        function updateCartUI() {
+            const countLabel = document.getElementById('cartCount');
+            const container = document.getElementById('cartItemsContainer');
+            const subtotalLabel = document.getElementById('cartSubtotal');
+
+            // Total Count Badge
+            const totalCount = cart.reduce((acc, curr) => acc + curr.quantity, 0);
+            countLabel.innerText = totalCount;
+
+            // Compute subtotal
+            const subtotal = cart.reduce((acc, curr) => acc + (curr.price * curr.quantity), 0);
+            subtotalLabel.innerText = `${subtotal.toLocaleString()} ETB`;
+
+            if (cart.length === 0) {
+                container.innerHTML = `<p class="text-center text-brand-espresso/60 py-10">Your bag is currently empty. Give your pup some love!</p>`;
+                return;
+            }
+
+            container.innerHTML = '';
+            cart.forEach(item => {
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'flex items-center gap-4 bg-brand-beige/50 p-3 rounded-2xl border border-brand-beige';
+                itemDiv.innerHTML = `
+                    <img src="${item.imageSrc}" alt="${item.title}" class="w-16 h-16 rounded-xl object-cover border border-brand-beige" onerror="this.src='https://placehold.co/100x100/A95C38/FAF6F0?text=Pet+Product'">
+                    <div class="flex-grow">
+                        <h4 class="font-serif text-sm font-bold text-brand-espresso line-clamp-1">${item.title}</h4>
+                        <p class="text-xs text-brand-terracotta font-semibold mt-1">${item.price.toLocaleString()} ETB</p>
+                        <div class="flex items-center gap-2 mt-2">
+                            <button onclick="decrementCartItem('${item.title}')" class="w-6 h-6 rounded-full bg-brand-cream border border-brand-beige flex items-center justify-center text-xs text-brand-espresso hover:bg-brand-terracotta hover:text-brand-cream transition-colors">-</button>
+                            <span class="text-xs font-semibold px-1">${item.quantity}</span>
+                            <button onclick="incrementCartItem('${item.title}')" class="w-6 h-6 rounded-full bg-brand-cream border border-brand-beige flex items-center justify-center text-xs text-brand-espresso hover:bg-brand-terracotta hover:text-brand-cream transition-colors">+</button>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(itemDiv);
+            });
+        }
+
+        // Display toast alerts
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toastMsg');
+            toastMsg.innerText = message;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+
+        function checkoutMessage() {
+            if (cart.length === 0) {
+                showToast("Please add items to your pet bag before checking out!");
+                return;
+            }
+            showToast("Opening Telegram to finalize your order...");
+            setTimeout(() => {
+                window.open("https://t.me/papipet1", "_blank");
+            }, 1000);
+        }
+
+        // Filtering product listings
+        function filterProducts(category) {
+            const items = document.querySelectorAll('.product-item');
+            const buttons = document.querySelectorAll('.filter-btn');
+            
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-brand-espresso', 'text-brand-cream', 'active');
+                btn.classList.add('bg-brand-cream', 'text-brand-espresso');
+            });
+
+            const activeBtn = document.getElementById(`filter-${category}`);
+            if (activeBtn) {
+                activeBtn.classList.remove('bg-brand-cream', 'text-brand-espresso');
+                activeBtn.classList.add('bg-brand-espresso', 'text-brand-cream', 'active');
+            }
+
+            items.forEach(item => {
+                if (category === 'all' || item.getAttribute('data-category') === category) {
+                    item.style.display = 'flex';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        // Three JS Interactive Global Scene Variables
+        let scene, camera, renderer, active3dMesh;
+        const canvasContainer = document.getElementById('threeCanvas');
+
+        function initThreeJS() {
+            scene = new THREE.Scene();
+            camera = new THREE.PerspectiveCamera(45, canvasContainer.clientWidth / canvasContainer.clientHeight, 0.1, 100);
+            camera.position.set(0, 3, 7);
+
+            renderer = new THREE.WebGLRenderer({ canvas: canvasContainer, antialias: true, alpha: true });
+            renderer.setSize(canvasContainer.clientWidth, canvasContainer.clientHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            renderer.shadowMap.enabled = true;
+
+            const ambientLight = new THREE.AmbientLight(0xfff3e3, 0.9);
+            scene.add(ambientLight);
+
+            const spotlight = new THREE.SpotLight(0xffae6e, 2);
+            spotlight.position.set(5, 8, 5);
+            spotlight.castShadow = true;
+            scene.add(spotlight);
+
+            const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+            directionalLight.position.set(-5, 5, 2);
+            scene.add(directionalLight);
+
+            loadBowlMesh();
+            animateThree();
+        }
+
+        function loadBowlMesh() {
+            if (active3dMesh) scene.remove(active3dMesh);
+            const bowlGroup = new THREE.Group();
+
+            const outerGeo = new THREE.CylinderGeometry(1.6, 1.2, 0.8, 32, 1, false, 0, Math.PI * 2);
+            const outerMat = new THREE.MeshStandardMaterial({ 
+                color: 0xc87a53, 
+                roughness: 0.15, 
+                metalness: 0.7 
+            });
+            const outerBowl = new THREE.Mesh(outerGeo, outerMat);
+            outerBowl.castShadow = true;
+            outerBowl.receiveShadow = true;
+            bowlGroup.add(outerBowl);
+
+            const foodGeo = new THREE.SphereGeometry(1.4, 32, 16, 0, Math.PI * 2, 0, Math.PI / 2);
+            const foodMat = new THREE.MeshStandardMaterial({ 
+                color: 0x5a3e2b,
+                roughness: 0.8, 
+                metalness: 0.1 
+            });
+            const foodMesh = new THREE.Mesh(foodGeo, foodMat);
+            foodMesh.position.y = -0.1;
+            bowlGroup.add(foodMesh);
+
+            const treatGeo = new THREE.BoxGeometry(0.2, 0.2, 0.2);
+            const treatMat = new THREE.MeshStandardMaterial({ color: 0x2c1b11, roughness: 0.9 });
+            for(let i=0; i < 12; i++){
+                const kibble = new THREE.Mesh(treatGeo, treatMat);
+                kibble.position.set(
+                    (Math.random() - 0.5) * 1.2,
+                    0.2,
+                    (Math.random() - 0.5) * 1.2
+                );
+                kibble.rotation.set(Math.random() * Math.PI, Math.random() * Math.PI, 0);
+                bowlGroup.add(kibble);
+            }
+
+            active3dMesh = bowlGroup;
+            scene.add(active3dMesh);
+        }
+
+        function loadBoneMesh() {
+            if (active3dMesh) scene.remove(active3dMesh);
+            const boneGroup = new THREE.Group();
+            const boneMat = new THREE.MeshStandardMaterial({ 
+                color: 0xf3ebe1, 
+                roughness: 0.4, 
+                metalness: 0.1 
+            });
+
+            const shaftGeo = new THREE.CylinderGeometry(0.3, 0.3, 2.4, 16);
+            const shaft = new THREE.Mesh(shaftGeo, boneMat);
+            shaft.rotation.z = Math.PI / 2;
+            boneGroup.add(shaft);
+
+            const jointGeo = new THREE.SphereGeometry(0.5, 16, 16);
+            const joint1 = new THREE.Mesh(jointGeo, boneMat);
+            joint1.position.set(-1.2, 0.3, 0);
+            boneGroup.add(joint1);
+
+            const joint2 = new THREE.Mesh(jointGeo, boneMat);
+            joint2.position.set(-1.2, -0.3, 0);
+            boneGroup.add(joint2);
+
+            const joint3 = new THREE.Mesh(jointGeo, boneMat);
+            joint3.position.set(1.2, 0.3, 0);
+            boneGroup.add(joint3);
+
+            const joint4 = new THREE.Mesh(jointGeo, boneMat);
+            joint4.position.set(1.2, -0.3, 0);
+            boneGroup.add(joint4);
+
+            active3dMesh = boneGroup;
+            scene.add(active3dMesh);
+        }
+
+        function change3dProduct(type) {
+            if(type === 'bowl') {
+                loadBowlMesh();
+            } else {
+                loadBoneMesh();
+            }
+        }
+
+        let isDragging = false;
+        let previousMousePosition = { x: 0, y: 0 };
+
+        canvasContainer.addEventListener('mousedown', () => { isDragging = true; });
+        canvasContainer.addEventListener('mousemove', (e) => {
+            const deltaMove = {
+                x: e.offsetX - previousMousePosition.x,
+                y: e.offsetY - previousMousePosition.y
+            };
+
+            if (isDragging && active3dMesh) {
+                const deltaRotationQuaternion = new THREE.Quaternion()
+                    .setFromEuler(new THREE.Euler(
+                        toRadians(deltaMove.y * 0.5),
+                        toRadians(deltaMove.x * 0.5),
+                        0,
+                        'XYZ'
+                    ));
+                active3dMesh.quaternion.multiplyQuaternions(deltaRotationQuaternion, active3dMesh.quaternion);
+            }
+
+            previousMousePosition = { x: e.offsetX, y: e.offsetY };
+        });
+
+        window.addEventListener('mouseup', () => { isDragging = false; });
+
+        canvasContainer.addEventListener('touchstart', (e) => {
+            isDragging = true;
+            if (e.touches.length === 1) {
+                previousMousePosition = {
+                    x: e.touches[0].clientX,
+                    y: e.touches[0].clientY
+                };
+            }
+        });
+
+        canvasContainer.addEventListener('touchmove', (e) => {
+            if (isDragging && active3dMesh && e.touches.length === 1) {
+                const deltaMove = {
+                    x: e.touches[0].clientX - previousMousePosition.x,
+                    y: e.touches[0].clientY - previousMousePosition.y
+                };
+
+                const deltaRotationQuaternion = new THREE.Quaternion()
+                    .setFromEuler(new THREE.Euler(
+                        toRadians(deltaMove.y * 0.8),
+                        toRadians(deltaMove.x * 0.8),
+                        0,
+                        'XYZ'
+                    ));
+                active3dMesh.quaternion.multiplyQuaternions(deltaRotationQuaternion, active3dMesh.quaternion);
+
+                previousMousePosition = {
+                    x: e.touches[0].clientX,
+                    y: e.touches[0].clientY
+                };
+            }
+        });
+
+        window.addEventListener('touchend', () => { isDragging = false; });
+
+        function toRadians(angle) { return angle * (Math.PI / 180); }
+
+        function animateThree() {
+            requestAnimationFrame(animateThree);
+            if (!isDragging && active3dMesh) {
+                active3dMesh.rotation.y += 0.005;
+            }
+            renderer.render(scene, camera);
+        }
+
+        window.addEventListener('resize', () => {
+            if (camera && renderer && canvasContainer) {
+                camera.aspect = canvasContainer.clientWidth / canvasContainer.clientHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(canvasContainer.clientWidth, canvasContainer.clientHeight);
+            }
+        });
+
+        window.onload = function() {
+            initThreeJS();
+        };
+    </script>
+</body>
+</html>
